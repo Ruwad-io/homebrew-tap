@@ -1,6 +1,6 @@
 <img src="https://askmywa.com/assets/icon-192.png" width="72" height="72" alt="askmywa logo">
 
-# abonur/homebrew-tap
+# Ruwad-io/homebrew-tap
 
 Homebrew formulae for [abonur](https://github.com/abonur) projects.
 
@@ -9,7 +9,7 @@ Homebrew formulae for [abonur](https://github.com/abonur) projects.
 [WhatsApp archive and MCP server](https://github.com/Ruwad-io/askmywa) for Claude and other AI assistants, on Mac and Linux.
 
 ```bash
-brew install abonur/tap/askmywa
+brew install ruwad-io/tap/askmywa
 askmywa install-service
 askmywa link
 ```
