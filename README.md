@@ -1,3 +1,5 @@
+<img src="https://askmywa.com/assets/icon-192.png" width="72" height="72" alt="askmywa logo">
+
 # abonur/homebrew-tap
 
 Homebrew formulae for [abonur](https://github.com/abonur) projects.
