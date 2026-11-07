@@ -1,6 +1,6 @@
 name: update
 
-# Copies the formula attached to the latest abonur/whatsapp-mcp release.
+# Copies the formula attached to the latest abonur/askmywa release.
 on:
   schedule:
     - cron: '17 * * * *'
@@ -12,7 +12,7 @@ permissions:
 concurrency: update
 
 jobs:
-  whatsapp-mcp:
+  askmywa:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,21 +21,21 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if ! gh release download --repo abonur/whatsapp-mcp --pattern whatsapp-mcp.rb --dir "$RUNNER_TEMP" --clobber; then
+          if ! gh release download --repo abonur/askmywa --pattern askmywa.rb --dir "$RUNNER_TEMP" --clobber; then
             echo "no release with a formula yet"
             exit 0
           fi
           # Only accept a formula for this project, with pinned checksums.
-          f="$RUNNER_TEMP/whatsapp-mcp.rb"
-          grep -q '^class WhatsappMcp < Formula' "$f"
+          f="$RUNNER_TEMP/askmywa.rb"
+          grep -q '^class Askmywa < Formula' "$f"
           grep -q 'sha256 "[0-9a-f]\{64\}"' "$f"
-          if grep -Eo 'url "[^"]+"' "$f" | grep -v '^url "https://github.com/abonur/whatsapp-mcp/releases/download/'; then
+          if grep -Eo 'url "[^"]+"' "$f" | grep -v '^url "https://github.com/abonur/askmywa/releases/download/'; then
             echo "::error::unexpected download URL in the formula"; exit 1
           fi
           ruby -c "$f"
           mkdir -p Formula
-          cp "$f" Formula/whatsapp-mcp.rb
-          echo "version=$(sed -n 's/^  version "\(.*\)"/\1/p' Formula/whatsapp-mcp.rb)" >> "$GITHUB_OUTPUT"
+          cp "$f" Formula/askmywa.rb
+          echo "version=$(sed -n 's/^  version "\(.*\)"/\1/p' Formula/askmywa.rb)" >> "$GITHUB_OUTPUT"
       - name: Commit
         if: steps.download.outputs.version != ''
         run: |
@@ -45,5 +45,5 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "whatsapp-mcp ${{ steps.download.outputs.version }}"
+          git commit -m "askmywa ${{ steps.download.outputs.version }}"
           git push
