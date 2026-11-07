@@ -1,6 +1,6 @@
 name: update
 
-# Copies the formula attached to the latest abonur/askmywa release.
+# Copies the formula attached to the latest Ruwad-io/askmywa release.
 on:
   schedule:
     - cron: '17 * * * *'
@@ -21,7 +21,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if ! gh release download --repo abonur/askmywa --pattern askmywa.rb --dir "$RUNNER_TEMP" --clobber; then
+          if ! gh release download --repo Ruwad-io/askmywa --pattern askmywa.rb --dir "$RUNNER_TEMP" --clobber; then
             echo "no release with a formula yet"
             exit 0
           fi
@@ -29,7 +29,7 @@ jobs:
           f="$RUNNER_TEMP/askmywa.rb"
           grep -q '^class Askmywa < Formula' "$f"
           grep -q 'sha256 "[0-9a-f]\{64\}"' "$f"
-          if grep -Eo 'url "[^"]+"' "$f" | grep -v '^url "https://github.com/abonur/askmywa/releases/download/'; then
+          if grep -Eo 'url "[^"]+"' "$f" | grep -v '^url "https://github.com/Ruwad-io/askmywa/releases/download/'; then
             echo "::error::unexpected download URL in the formula"; exit 1
           fi
           ruby -c "$f"
