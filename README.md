@@ -2,7 +2,7 @@
 
 # Ruwad-io/homebrew-tap
 
-Homebrew formulae for [abonur](https://github.com/abonur) projects.
+Homebrew formulae for [RUWAD](https://ruwad.io) projects.
 
 ## askmywa (WhatsApp MCP)
 
